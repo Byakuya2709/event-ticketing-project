@@ -69,8 +69,11 @@ docker-compose down
 - Cấu hình các biến môi trường trong `docker-compose.yml`:
 
 SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/eventbox
+
 SPRING_DATASOURCE_USERNAME: root
+
 SPRING_DATASOURCE_PASSWORD: root
+
 SPRING_DATA_MONGODB_URI: mongodb://mongo-db:27017/auth_db
 
 
