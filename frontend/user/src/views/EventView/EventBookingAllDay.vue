@@ -106,14 +106,16 @@ export default {
     },
     amountInt() {
       return Math.round(
-        this.event.eventPrice * this.selectedZone.zoneRate * this.event.totalDay
+        this.event.eventPrice *
+          this.selectedZone.zoneRate *
+          (this.event.totalDay || 1)
       ); // Chuyển thành số nguyên
     },
     formattedPrice() {
       return (
         this.event.eventPrice *
         this.selectedZone.zoneRate *
-        this.event.totalDay
+        (this.event.totalDay || 1)
       ).toLocaleString("vi-VN");
     },
   },
@@ -221,16 +223,23 @@ export default {
     async bookTicket() {
       const toast = useToast();
       if (this.selectedSeats.length > 0) {
+        const price =
+          this.event.eventPrice *
+          this.selectedZone.zoneRate *
+          (this.event.totalDay || 1);
+        console.log(price);
+
         const ticket = {
           eventId: this.event.eventId,
           userId: this.userInfo.id,
           userEmail: this.userInfo.userMail,
-          ticketPrice: this.event.eventPrice,
+          ticketPrice: price,
           day: "0",
           ticketPosition: this.selectedSeats[0],
           ticketDuration: "ALL_DAYS",
           ticketZone: this.selectedZone.zoneName,
         };
+        console.log(ticket);
         try {
           const response = await api.post(`/booking/ticket`, ticket);
           toast.info(
@@ -273,9 +282,10 @@ export default {
 };
 </script>
 <style scoped>
-
-p, label, select {
-  color: black!important;
+p,
+label,
+select {
+  color: black !important;
 }
 .modal-overlay {
   position: fixed;

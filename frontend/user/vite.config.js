@@ -6,7 +6,6 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
 
-  base: '/CT250_UserFE/', // Thay bằng tên repo GitHub của bạn
   plugins: [
     vue(),
   ],

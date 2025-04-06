@@ -27,8 +27,16 @@ export default {
         if (this.filters.userEmail)
           params.append("userEmail", this.filters.userEmail);
 
+        if (!this.filters.eventId) {
+          this.$toast.info("Vui lòng chọn sự kiện.");
+          return;
+        }
+
         const response = await api.get(`/events/tickets?${params.toString()}`);
         this.tickets = response.data.content;
+        if (this.tickets.length === 0) {
+          this.$toast.info("Không có vé nào.");
+        }
         this.totalPages = response.data.totalPages;
         this.currentPage = response.data.pageable.pageNumber;
       } catch (error) {
@@ -156,7 +164,7 @@ export default {
           </thead>
           <tbody>
             <tr
-              v-for="(ticket, index) in tickets"
+              v-for="ticket in tickets"
               :key="ticket.ticketId"
               class="text-center even:bg-gray-100 hover:bg-gray-200 transition"
             >

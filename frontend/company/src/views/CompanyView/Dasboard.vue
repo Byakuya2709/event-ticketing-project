@@ -28,6 +28,12 @@ export default {
     };
   },
   methods: {
+    formatToVND(value) {
+      return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(value);
+    },
     async fetchTotalTicketPriceByStatus() {
       try {
         const response = await api.get(
@@ -191,7 +197,9 @@ export default {
             >
               <div class="flex items-center space-x-2">
                 <span class="font-medium text-gray-700">{{ key }}:</span>
-                <span class="text-sm text-gray-500">{{ value }}</span>
+                <span class="text-sm text-gray-500">{{
+                  formatToVND(value)
+                }}</span>
               </div>
               <!-- Colored Label for Ticket Status -->
               <span

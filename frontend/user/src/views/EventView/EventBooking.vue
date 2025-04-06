@@ -82,8 +82,10 @@
 </template>
 
 <style scoped>
-p,lable,select {
-  color: black!important;
+p,
+lable,
+select {
+  color: black !important;
 }
 .modal-overlay {
   position: fixed;
@@ -380,6 +382,7 @@ export default {
           ticketDuration: "SINGLE_DAY",
           ticketZone: this.selectedZone.zoneName,
         };
+        console.log("Ticket:", ticket);
         try {
           const response = await api.post(`/booking/ticket`, ticket);
 
